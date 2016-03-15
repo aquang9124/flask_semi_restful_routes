@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Users Show</title>
+</head>
+<body>
+	{% if user %}
+		{% for person in user %}
+		<h1>User {{ person.id }}</h1>
+		<p>Full name: {{ person.first_name + ' ' + person.last_name }}</p>
+		<p>Email: {{ person.email }}</p>
+		<p>Created at: {{ person.created_at }}</p>
+		<form action="/users/edit/{{ person.id }}">
+			<button class="btn btn-primary">Edit</button>
+		</form>
+		<form action="/users/delete/{{ person.id }}" method="post">
+			<button class="btn btn-danger">Delete</button>
+		</form>
+		<a href="/back">Go back</a>
+		{% endfor %}
+	{% endif %}
+</body>
+</html>

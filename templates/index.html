@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Users Index</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<h1>Users</h1>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Created At</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% if users %}
+						{% for user in users %}
+						<tr>
+							<th>{{ user.id }}</th>
+							<th><a href="/users/show/{{ user.id }}">{{ user.first_name + ' ' + user.last_name }}</a></th>
+							<th>{{ user.email }}</th>
+							<th>{{ user.created_at }}</th>
+							<th>
+								<form action="/users/show/{{ user.id }}">
+									<button class="btn btn-primary">Show</button>
+								</form>
+								<form action="/users/edit/{{ user.id }}">
+									<button class="btn btn-primary">Edit</button>
+								</form>
+								<form action="/users/delete/{{ user.id }}" method="post">
+									<button class="btn btn-danger">Delete</button>
+								</form>
+							</th>
+						</tr>
+						{% endfor %}
+					{% endif %}
+					</tbody>
+				</table>
+				<a href="/new" class="btn btn-default">Add a new user</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
